@@ -1,0 +1,21 @@
+{
+    "name": "テキストの読み上げ",
+    "author": "Osamu Monoe",
+    "version": "0.9.1",
+    "locale": "ja",
+    "default_locale": "ja",
+    "description": "選択された文字を読み上げますよ",
+    "icons": {
+        "16": "assets/icon16.png",
+        "48": "assets/icon48.png",
+        "128": "assets/icon148.png"
+    },
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "options_page": "options.html",
+    "permissions": [
+        "contextMenus"
+    ]
+}

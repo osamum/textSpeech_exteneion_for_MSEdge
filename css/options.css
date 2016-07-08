@@ -1,0 +1,21 @@
+.label{
+    float:left;
+    width:80px;
+}
+.range{
+    width:300px;
+}
+select{
+    background-color: #000050;
+    color: white;
+}
+.buttons{
+    width:50px;
+    margin-right:0px;
+    float:right;
+}
+#display{
+    float:left;
+    color:yellow;
+}
+h1 {text-align: center;}

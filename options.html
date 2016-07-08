@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Speech Option</title>
+    <link rel="stylesheet" href="/css/options.css" type="text/css" />
+    <script src="/options.js"></script>
+</head>
+<body>
+    <h1>読み上げ拡張のオプション設定</h1>
+    <div style="width:450px; margin: 0 auto;background-color:navy;color:white;padding:15px;">
+        <div class="label">Volume&nbsp;:&nbsp;</div>
+        <div>
+            <input id="volume" type="range" class="range" min="0" max="1" step="0.1">
+        </div>
+        <div style="clear:both;"></div>
+        <div class="label">Late&nbsp;:&nbsp;</div>
+        <div>
+            <input id="rate" type="range" class="range" min="0" max="5" step="0.5" value="1">
+        </div>
+        <div style="clear:both;"></div>
+        
+        <div class="label">Pitch&nbsp;:&nbsp;</div>
+        <div>
+            <input id="pitch" type="range" class="range" min="0" max="2" step="0.1">
+        </div>
+        <div style="clear:both;"></div>
+        <!--
+        <div class="label">Language&nbsp;:&nbsp;</div>
+        <div>
+            <select id="lang">
+		        <option value="ja-JP">日本語</option>
+		        <option value="en-US">英語</option>
+	        </select>
+        </div>
+        -->
+        <div class="label">Voice&nbsp;type&nbsp;:&nbsp;</div>
+        <div>
+            <select id="voiceType">
+	        </select>
+        </div>
+        <div style="clear:both;height:20px;"></div>
+        <div id="display" ></div>
+        <button class="buttons" id="saveBtn">保 存</button>
+        <button class="buttons" id="clearBtn">クリア</button>
+        <div style="clear:both;"></div>
+    </div>
+</body>
+</html>
