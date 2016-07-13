@@ -1,66 +1,69 @@
-var $id = function(id){return document.getElementById(id)};
-    //SpeechSynthesis のインスタンスを生成
-    var speech = new SpeechSynthesisUtterance();
-  
-    var ctrl_text,
-        crtl_volume,
-        ctrl_rate,
-        ctrl_pitch,
-        ctrl_lang,
-        ctrl_voiceType,
-        ctrl_display;
-     
-    function setCtrl(){
-        crtl_volume = $id('volume');
-        ctrl_rate = $id('rate');
-        ctrl_pitch = $id('pitch');
-        //ctrl_lang = $id('lang');
-        ctrl_voiceType = $id('voiceType');
-        ctrl_display = $id('display');
-    };
+(() => {
+    // LocalStorage Key
+    const STORAGE_KEY = 'extn_speech_info';
 
-    function setHandlers() {
-       $id('saveBtn').addEventListener('click', ()=> {
-            var speechInfo ={};
-            speechInfo.volume = crtl_volume.value;
-	        speechInfo.rate = ctrl_rate.value;
-	        speechInfo.pitch = ctrl_pitch.value; // 1 = normal
-            speechInfo.voiceIndex = ctrl_voiceType.selectedIndex;
-            var speechInfoJSON = JSON.stringify(speechInfo);    
-           localStorage.setItem('extn_speech_info',speechInfoJSON);
-           ctrl_display.textContent = '設定を保存しました。ブラウザーの次回起動時から有効になります。';
-       });
+    // HTML TAG Property
+    // id: TAG ID
+    // storage: true: 保存, false: 保存しない
+    const CTRL_CONFIG = [
+        {id: 'saveBtn',   type: 0, storage: false},
+        {id: 'clearBtn',  type: 0, storage: false},
+        {id: 'volume',    type: 1, storage: true},
+        {id: 'rate',      type: 1, storage: true},
+        {id: 'pitch',     type: 1, storage: true},
+        {id: 'voiceType', type: 2, storage: true},
+        {id: 'display',   type: 3, storage: false}
+    ]
 
-       $id('clearBtn').addEventListener('click', ()=>{
-           localStorage.clear();
-           ctrl_display.textContent = '保存されていた前回の設定を削除しました。';
-       })
-    }
+    // SpeechSynthesisUtterance APIの存在チェック
+    if (!('SpeechSynthesisUtterance' in window)) return;
 
-     function initControl(){
-        speechSynthesis.getVoices().forEach(function(voice){
-            var opt = document.createElement('option');
+    // SpeechSynthesis のインスタンスを生成
+    let speech = new SpeechSynthesisUtterance();
+
+    let isLocalStorage = (element, index, array) => element.storage;
+    
+    // Get HTML TAG Object
+    let ctrl = {}
+    CTRL_CONFIG.forEach((_ctrl)=>ctrl[_ctrl.id] = document.getElementById(_ctrl.id));
+
+    speechSynthesis
+        .getVoices()
+        .forEach((voice) => {
+            let opt = document.createElement('option');
             opt.innerText = voice.name;
-            //voiceTypes.push(voice);
-            ctrl_voiceType.appendChild(opt);
+            ctrl['voiceType'].appendChild(opt);
         });
+
+    // LocalStorageから保存されている画面設定を取得する
+    let speechInfoJSON = localStorage.getItem(STORAGE_KEY);
+    if(speechInfoJSON !== null){
+        let speechInfo = JSON.parse(speechInfoJSON);
+        CTRL_CONFIG
+            .filter(isLocalStorage)
+            .forEach((_ctrl)=>{
+                if (_ctrl.type === 1) ctrl[_ctrl.id].value = speechInfo[_ctrl.id]; 
+                if (_ctrl.type === 2) ctrl[_ctrl.id].selectedIndex = speechInfo[_ctrl.id];
+            });
+        ctrl['display'].textContent = '保存されていた前回の設定を読み込みました。';
     }
 
-    function loadData() {
-        var speechInfoJSON = localStorage.getItem('extn_speech_info');
-        if(speechInfoJSON !== null){
-            var speechInfo = JSON.parse(speechInfoJSON);
-            crtl_volume.value = speechInfo.volume;
-            ctrl_rate.value = speechInfo.rate;
-            ctrl_pitch.value = speechInfo.pitch;
-            ctrl_voiceType.selectedIndex = speechInfo.voiceIndex;
-            ctrl_display.textContent = '保存されていた前回の設定を読み込みました。';
-        }
-    }
+    // 保存ボタンに対する処理を定義
+    ctrl['saveBtn'].addEventListener('click', ()=> {
+        let speechInfo = {};
+        CTRL_CONFIG
+            .filter(isLocalStorage)
+            .forEach((_ctrl)=>{
+                if (_ctrl.type === 1) speechInfo[_ctrl.id] = ctrl[_ctrl.id].value; 
+                if (_ctrl.type === 2) speechInfo[_ctrl.id] = ctrl[_ctrl.id].selectedIndex;
+            });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(speechInfo));
+        ctrl['display'].textContent = '設定を保存しました。ブラウザーの次回起動時から有効になります。';
+    });
 
-    window.onload = ()=>{
-         setCtrl();
-         initControl();
-         loadData();
-         setHandlers();
-    };
+    // クリアボタンに対する処理を定義
+    ctrl['clearBtn'].addEventListener('click', () => {
+        localStorage.clear();
+        ctrl['display'].textContent = '保存されていた前回の設定を削除しました。';
+    })
+})();
