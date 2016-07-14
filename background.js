@@ -47,11 +47,9 @@ browser.contextMenus.create({
 });
 
 (()=> {
-    //var cnt = 0;
     voices.forEach(function(voice, index){
         var opt = document.createElement('option');
         createVoiceMenu(voice.name,index);
-        //cnt++;
     });
 })();
 
