@@ -2,6 +2,8 @@
 //v 0.8
 //Osamu Monoe
 (()=> {
+// LocalStorage Key
+const STORAGE_KEY = 'extn_speech_info';
 
 var speech = new SpeechSynthesisUtterance();
 var voices = window.speechSynthesis.getVoices();
@@ -11,7 +13,7 @@ var selected_voice;
 //オプションページで設定された内容を読み込む
 
 
-var infoJSON = localStorage.getItem('extn_speech_info');
+var infoJSON = localStorage.getItem(STORAGE_KEY);
 if( infoJSON !== null){
     //alert('setting is exist.');
     var speechInfo = JSON.parse(infoJSON);
@@ -45,11 +47,11 @@ browser.contextMenus.create({
 });
 
 (()=> {
-    var cnt = 0;
-    voices.forEach(function(voice){
+    //var cnt = 0;
+    voices.forEach(function(voice, index){
         var opt = document.createElement('option');
-        createVoiceMenu(voice.name,cnt);
-        cnt++;
+        createVoiceMenu(voice.name,index);
+        //cnt++;
     });
 })();
 
