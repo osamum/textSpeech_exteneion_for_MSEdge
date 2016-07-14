@@ -9,6 +9,7 @@ Microsoft Edge にて、選択されたテキストを読み上げるための�
 [既知の問題]
 
 optionページ (option.js) で設定を LocalStorage に保存していますが、拡張のメインのロジックが記述してある background.js から読みだせません。
+
 現在 Windows フィードバックにて報告しています。
 
 ===== English =====
