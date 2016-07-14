@@ -1,6 +1,7 @@
 //Speech Text extension for Microsoft Edge.
 //v 0.8
 //Osamu Monoe
+(()=> {
 
 var speech = new SpeechSynthesisUtterance();
 var voices = window.speechSynthesis.getVoices();
@@ -8,24 +9,24 @@ var selected_voice_index = 999;
 var selected_voice;
 
 //オプションページで設定された内容を読み込む
-(()=> {
-    var infoJSON = localStorage.getItem('extn_speech_info');
-        if( infoJSON !== null){
-            //alert('setting is exist.');
-            var speechInfo = JSON.parse(infoJSON);
-            speech.volume = speechInfo.volume;
-            //alert('volume load : OK.');
-	        speech.rate = speechInfo.rate;
-            //alert('rate load : OK');
-	        speech.pitch = speechInfo.pitch; // 1 = normal
-            //alert('pitch load : OK');
-            selected_voice_index = speechInfo.voiceIndex;
-            //alert('index load : OK');
-            selected_voice = voices[selected_voice_index];
-            //alert('voice load : OK');
-        }
-})();
-    
+
+
+var infoJSON = localStorage.getItem('extn_speech_info');
+if( infoJSON !== null){
+    //alert('setting is exist.');
+    var speechInfo = JSON.parse(infoJSON);
+    speech.volume = speechInfo.volume;
+    //alert('volume load : OK.');
+	speech.rate = speechInfo.rate;
+    //alert('rate load : OK');
+	speech.pitch = speechInfo.pitch; // 1 = normal
+    //alert('pitch load : OK');
+    selected_voice_index = speechInfo.voiceIndex;
+    //alert('index load : OK');
+    selected_voice = voices[selected_voice_index];
+    //alert('voice load : OK');
+} 
+
 // コンテキストメニューに "Speech for "%s"" を追加
 browser.contextMenus.create({
     id: 'menu_execSpeech',
@@ -81,3 +82,4 @@ function speechText(speechText) {
     speechSynthesis.speak(speech);
 }
 
+})();
