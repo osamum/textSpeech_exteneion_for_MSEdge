@@ -13,6 +13,7 @@ optionページ (option.js) で設定を LocalStorage に保存しています�
 現在 Windows フィードバックにて報告しています。
 
 ===== English =====
+
 This is Text Speech extension for Microsoft Edge.
 
 The extension does read the selected text in the browser.
