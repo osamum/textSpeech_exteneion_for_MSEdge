@@ -78,7 +78,6 @@
 
     //音声ごとのサブメニューを作成
     voices.forEach(function(voice, index){
-        //var opt = document.createElement('option');
         createVoiceMenu(voice.name,voice.default,index);
     });
 
@@ -97,7 +96,5 @@
            });
         }
     });
-
-
 
 })();

@@ -23,10 +23,6 @@
 
     // LocalStorageから保存されている画面設定を取得する
     let speechInfoJSON = localStorage.getItem(STORAGE_KEY);
-
-    //let keys = ['volume', 'rate', 'pitch', 'voiceType','voiceIndex'];
-
-
     if(speechInfoJSON !== null){
         let speechInfo = JSON.parse(speechInfoJSON);
         CTRL_CONFIG
@@ -45,7 +41,7 @@
             .forEach((_ctrl)=>{
                 if (_ctrl.type === 1) speechInfo[_ctrl.id] = ctrl[_ctrl.id].value; 
             });
-        
+        //設定情報を localStorage に保存
         localStorage.setItem(STORAGE_KEY, JSON.stringify(speechInfo));
         ctrl['display'].textContent = '設定を保存しました。ブラウザーの次回起動時から有効になります。';        
     });
