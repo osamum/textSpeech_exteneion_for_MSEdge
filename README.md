@@ -14,7 +14,8 @@ Microsoft Edge にて、選択されたテキストを読み上げるための�
 
 This is Text Speech extension for Microsoft Edge.
 
-The extension does read the selected text in the browser.
+The extension does read the selected text in the browser. 
+select text on the browser and click mouse right button, show the context menu.
 
 You can add more voice type that use Windows 10 language pack add feature.
 
