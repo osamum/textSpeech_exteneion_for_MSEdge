@@ -12,7 +12,12 @@
     let selected_voice_index = 999;
     let selected_voice;
     let speechInfo;
-      
+    //UI に表示する文字列をロード(国際化対応)
+    let captions = {
+         options : browser.i18n.getMessage('options'),
+         memu :  browser.i18n.getMessage('menu')
+    };
+    
     //オプションページで設定された内容を読み込む関数
     function loadData() {
         let infoJSON = localStorage.getItem(STORAGE_KEY);
@@ -21,7 +26,8 @@
             speech.volume = speechInfo.volume;
 	        speech.rate = speechInfo.rate;
 	        speech.pitch = speechInfo.pitch; // 1 = normal
-        } 
+        }
+        
     }
 
     function addSeparator(itemID) {
@@ -62,10 +68,12 @@
         speechSynthesis.speak(speech);
     }
 
+    
+
     // コンテキストメニューに "Speech for "%s"" を追加
     browser.contextMenus.create({
         id: 'menu_execSpeech',
-        title: '"%s"を読み上げ', // %s は選択している文字列で置き換わる
+        title: '"%s"' +  captions.memu, // %s は選択している文字列で置き換わる
         contexts: ['selection'],  // 選択しているときのみメニューに表示される
         onclick: (info, tab) => { //クリックされた際のアクション
             loadData();
@@ -88,7 +96,7 @@
     // コンテキストメニューにオプションメニューを追加
     browser.contextMenus.create({
         id: 'menu_option',
-        title: 'オプション...', // %s は選択している文字列で置き換わる
+        title: captions.options, // %s は選択している文字列で置き換わる
         contexts: ['selection'],  // 選択しているときのみメニューに表示される
         onclick: (info, tab) => { //クリックされた際のアクション
            browser.tabs.create({

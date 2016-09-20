@@ -1,0 +1,26 @@
+{
+  "options": {
+    "message": "設定..."
+  },
+  "menu":{
+    "message" : "を読み上げ"
+  },
+  "option_page_title":{
+    "message" : "読み上げ拡張のオプション設定"
+  },
+  "loadPreviousData":{
+    "message" : "保存されていた前回の設定を読み込みました。"
+  },
+  "deletePreviousData":{
+    "message" : "保存されていた前回の設定を削除しました。"
+  },
+  "saveData":{
+    "message" : "設定を保存しました。ブラウザーの次回起動時から有効になります。"
+  },
+  "label_save":{
+    "message" : "保存"
+  },
+   "label_clear":{
+    "message" : "クリア"
+  }
+}

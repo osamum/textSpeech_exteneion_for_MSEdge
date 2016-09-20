@@ -1,0 +1,26 @@
+{
+  "options": {
+    "message": "Options..."
+  },
+  "menu":{
+    "message" : "aloud"
+  },
+    "option_page_title":{
+    "message" : "Speech extension's settings page."
+  },
+  "loadPreviousData":{
+    "message" : "Previous saved settings was loaded."
+  },
+  "deletePreviousData":{
+    "message" : "Previous saved settings was deleted."
+  },
+  "saveData":{
+    "message" : "This setting was saved.The setting's enable is browser restart next time."
+  },
+  "label_save":{
+    "message" : "Save"
+  },
+   "label_clear":{
+    "message" : "Clear"
+  }
+}
